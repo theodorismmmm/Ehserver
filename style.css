@@ -1,0 +1,224 @@
+/* EhServer – Hauptstilvorlage */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --farbe-hintergrund: #0d1117;
+  --farbe-karte: #161b22;
+  --farbe-rahmen: #30363d;
+  --farbe-akzent: #58a6ff;
+  --farbe-akzent-hell: #79c0ff;
+  --farbe-text: #e6edf3;
+  --farbe-text-gedaempft: #8b949e;
+  --farbe-code-bg: #0d1117;
+  --farbe-code-text: #79c0ff;
+  --farbe-erfolg: #3fb950;
+  --schriftart-mono: "Courier New", Courier, monospace;
+  --schriftart-haupt: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --radius: 8px;
+  --schatten: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background-color: var(--farbe-hintergrund);
+  color: var(--farbe-text);
+  font-family: var(--schriftart-haupt);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* ── Kopfbereich ────────────────────────────────────────── */
+header {
+  width: 100%;
+  max-width: 860px;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--farbe-akzent-hell);
+}
+
+header p.untertitel {
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  color: var(--farbe-text-gedaempft);
+}
+
+/* ── Hauptinhalt ────────────────────────────────────────── */
+main {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Karte ──────────────────────────────────────────────── */
+.karte {
+  background: var(--farbe-karte);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--schatten);
+}
+
+.karte h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--farbe-text-gedaempft);
+  margin-bottom: 1rem;
+}
+
+/* ── Aktueller Server-Code ──────────────────────────────── */
+.server-code-anzeige {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--farbe-code-bg);
+  border: 1px solid var(--farbe-akzent);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+}
+
+.server-code-wert {
+  font-family: var(--schriftart-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--farbe-code-text);
+  letter-spacing: 0.12em;
+  flex: 1;
+  word-break: break-all;
+}
+
+.kopieren-btn {
+  background: none;
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  color: var(--farbe-text-gedaempft);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.9rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.kopieren-btn:hover {
+  border-color: var(--farbe-akzent);
+  color: var(--farbe-akzent);
+  background: rgba(88, 166, 255, 0.08);
+}
+
+.kopieren-btn.kopiert {
+  border-color: var(--farbe-erfolg);
+  color: var(--farbe-erfolg);
+}
+
+/* ── Status-Abzeichen ───────────────────────────────────── */
+.status-zeile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--farbe-text-gedaempft);
+  margin-top: 0.85rem;
+}
+
+.status-punkt {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--farbe-erfolg);
+  display: inline-block;
+  box-shadow: 0 0 6px var(--farbe-erfolg);
+  animation: pulsieren 2s ease-in-out infinite;
+}
+
+@keyframes pulsieren {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Code-Anzeige ───────────────────────────────────────── */
+.code-block {
+  background: var(--farbe-code-bg);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  font-family: var(--schriftart-mono);
+  font-size: 0.9rem;
+  color: var(--farbe-code-text);
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.6;
+}
+
+/* ── Info-Tabelle ───────────────────────────────────────── */
+.info-tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.info-tabelle tr + tr td {
+  border-top: 1px solid var(--farbe-rahmen);
+}
+
+.info-tabelle td {
+  padding: 0.65rem 0;
+}
+
+.info-tabelle td:first-child {
+  color: var(--farbe-text-gedaempft);
+  width: 40%;
+}
+
+.info-tabelle td:last-child {
+  color: var(--farbe-text);
+  font-family: var(--schriftart-mono);
+  font-size: 0.88rem;
+}
+
+/* ── Fußzeile ───────────────────────────────────────────── */
+footer {
+  margin-top: 3rem;
+  font-size: 0.82rem;
+  color: var(--farbe-text-gedaempft);
+  text-align: center;
+}
+
+footer a {
+  color: var(--farbe-akzent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsiv ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.7rem;
+  }
+
+  .server-code-wert {
+    font-size: 1.4rem;
+  }
+
+  .karte {
+    padding: 1.25rem 1rem;
+  }
+}
