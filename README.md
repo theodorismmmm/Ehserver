@@ -1,2 +1,2 @@
-# Ehserver
-Eh Server Host
+# Hannover RP Server
+Hannover RP Server Host
