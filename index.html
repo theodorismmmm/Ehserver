@@ -32,6 +32,15 @@
         >
           Kopieren
         </button>
+        <button
+          class="aktualisieren-btn"
+          id="aktualisieren-btn"
+          title="Auf neuen Code prüfen"
+          onclick="codeAktualisieren()"
+        >
+          <span class="aktualisieren-symbol" aria-hidden="true">↻</span>
+          Aktualisieren
+        </button>
       </div>
 
       <div class="status-zeile">
@@ -138,6 +147,16 @@
         btn.textContent = original;
         btn.classList.remove("kopiert");
       }, 2000);
+    }
+
+    // Auf neuen Code prüfen – kurze Verzögerung damit das Lade-Symbol sichtbar ist
+    function codeAktualisieren() {
+      const btn = document.getElementById("aktualisieren-btn");
+      btn.disabled = true;
+      btn.classList.add("laedt");
+      setTimeout(function () {
+        window.location.reload();
+      }, 700);
     }
   </script>
 

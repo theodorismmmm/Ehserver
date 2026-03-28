@@ -208,6 +208,48 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* ── Aktualisieren-Schaltfläche ─────────────────────────── */
+.aktualisieren-btn {
+  background: none;
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  color: var(--farbe-text-gedaempft);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.9rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.aktualisieren-btn:hover {
+  border-color: var(--farbe-akzent);
+  color: var(--farbe-akzent);
+  background: rgba(88, 166, 255, 0.08);
+}
+
+.aktualisieren-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.aktualisieren-symbol {
+  font-size: 1rem;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.aktualisieren-btn.laedt .aktualisieren-symbol {
+  animation: drehen 0.7s linear infinite;
+}
+
+@keyframes drehen {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 /* ── Responsiv ──────────────────────────────────────────── */
 @media (max-width: 600px) {
   header h1 {
