@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EhServer – Aktueller Server-Code und Dienstinformationen" />
+  <title>EhServer – Aktueller Server-Code</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Kopfbereich ──────────────────────────────────── -->
+  <header>
+    <h1>EhServer</h1>
+    <p class="untertitel">Server-Verwaltungsportal &amp; Code-Übersicht</p>
+  </header>
+
+  <!-- ── Hauptinhalt ──────────────────────────────────── -->
+  <main>
+
+    <!-- Aktueller Server-Code -->
+    <section class="karte" aria-labelledby="code-titel">
+      <h2 id="code-titel">Aktueller Server-Code</h2>
+
+      <div class="server-code-anzeige">
+        <span class="server-code-wert" id="server-code">0xkftshc</span>
+        <button
+          class="kopieren-btn"
+          id="kopieren-btn"
+          title="Code in die Zwischenablage kopieren"
+          onclick="codeKopieren()"
+        >
+          Kopieren
+        </button>
+      </div>
+
+      <div class="status-zeile">
+        <span class="status-punkt" aria-hidden="true"></span>
+        <span>Dienst aktiv – Code gültig</span>
+      </div>
+    </section>
+
+    <!-- Vollständiger Code -->
+    <section class="karte" aria-labelledby="vollcode-titel">
+      <h2 id="vollcode-titel">Vollständiger Code</h2>
+      <div class="code-block" id="vollstaendiger-code" role="region" aria-label="Vollständiger Server-Code">0xkftshc</div>
+    </section>
+
+    <!-- Technische Details -->
+    <section class="karte" aria-labelledby="details-titel">
+      <h2 id="details-titel">Technische Details</h2>
+      <table class="info-tabelle" aria-label="Server-Informationen">
+        <tbody>
+          <tr>
+            <td>Server-Code</td>
+            <td>0xkftshc</td>
+          </tr>
+          <tr>
+            <td>Dienst</td>
+            <td>EhServer Host</td>
+          </tr>
+          <tr>
+            <td>Format</td>
+            <td>Hexadezimal-Kennung</td>
+          </tr>
+          <tr>
+            <td>Länge</td>
+            <td>8 Zeichen</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>Aktiv</td>
+          </tr>
+          <tr>
+            <td>Zuletzt aktualisiert</td>
+            <td id="letztes-update">–</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- ── Fußzeile ─────────────────────────────────────── -->
+  <footer>
+    <p>&copy; <span id="jahr"></span> EhServer &mdash; Alle Rechte vorbehalten.</p>
+  </footer>
+
+  <script>
+    // Aktuelles Jahr und Zeitstempel setzen
+    (function () {
+      const jetzt = new Date();
+      document.getElementById("jahr").textContent = jetzt.getFullYear();
+      document.getElementById("letztes-update").textContent =
+        jetzt.toLocaleString("de-DE", {
+          dateStyle: "long",
+          timeStyle: "short",
+        });
+    })();
+
+    // Code in die Zwischenablage kopieren
+    function codeKopieren() {
+      const code = document.getElementById("server-code").textContent.trim();
+      const btn  = document.getElementById("kopieren-btn");
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(function () {
+          bestaetigenKopiert(btn);
+        }).catch(function () {
+          fallbackKopieren(code, btn);
+        });
+      } else {
+        fallbackKopieren(code, btn);
+      }
+    }
+
+    function fallbackKopieren(text, btn) {
+      const bereich = document.createElement("textarea");
+      bereich.value = text;
+      bereich.style.position = "fixed";
+      bereich.style.opacity  = "0";
+      document.body.appendChild(bereich);
+      bereich.select();
+      try {
+        document.execCommand("copy");
+        bestaetigenKopiert(btn);
+      } catch (fehler) {
+        console.error("Kopieren fehlgeschlagen:", fehler);
+      }
+      document.body.removeChild(bereich);
+    }
+
+    function bestaetigenKopiert(btn) {
+      const original = btn.textContent;
+      btn.textContent = "Kopiert ✓";
+      btn.classList.add("kopiert");
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.classList.remove("kopiert");
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
